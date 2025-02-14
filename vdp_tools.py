@@ -121,7 +121,7 @@ if __name__ == "__main__":
             print("-p file - convert a .txt into a palette")
             print("-t file (tiles per row) (tiles per line) - convert raw file into tiles")
             print("-s file (tiles per row) (tiles per line) - convert raw file into sprite mode with appropriate formatting")
-            print()
+            print("-h - print this information to the screen")
             exit()
         case "-p":
             argv = argv[2:]
@@ -141,4 +141,4 @@ if __name__ == "__main__":
                 write_tile(argv[0], abs(int(argv[1])), abs(int(argv[2])), True)
                 exit()
         case _:
-            raise Exception("Option not recognized")
+            raise Exception(f"Option not recognized. Try python3 {__file__} -h")

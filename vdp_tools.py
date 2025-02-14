@@ -55,7 +55,6 @@ def write_tile(file_path : str, w : int, h : int, is_sprite : bool):
                 index_w += 1    
                 if index_w == w * 8:
                     index_h += 1
-                    index_w = 0
 
             #TODO: Make better functions!!!
             def save_tiles():
@@ -119,16 +118,10 @@ if __name__ == "__main__":
     
     match argv[1]:
         case "-h":
-            print("--PALETTE ARGS--")
             print("-p file - convert a .txt into a palette")
-            print(f"Usage example:\t{__file__} colors.txt -p pallete.txt")
-            print("--SPRITE AND TILE ARGS--")
-            print("-t file (tiles per line) (tiles per row)  - convert a raw file into tiles")
-            print("-s - set to sprite mode with the appropriate formatting")
-            print(f"Usage example (tile):\t{__file__} -t tiles.raw 2 3")
-            print(f"Usage example (sprite):\t{__file__} -t sprites.raw 4 4 -s")
-            print(f"-- --")
-            print(f"-h brings this to the terminal")
+            print("-t file (tiles per row) (tiles per line) - convert raw file into tiles")
+            print("-s file (tiles per row) (tiles per line) - convert raw file into sprite mode with appropriate formatting")
+            print()
             exit()
         case "-p":
             argv = argv[2:]
@@ -140,9 +133,12 @@ if __name__ == "__main__":
         case "-t":
             argv = argv[2:]
             if len(re.findall(RAW_FILE_REGEX, argv[0])) == 1:
-                is_sprite = False
-                if len(argv) > 3:
-                        is_sprite = argv[3] == "-s"
-                write_tile(argv[0], abs(int(argv[1])), abs(int(argv[2])), is_sprite)
+                write_tile(argv[0], abs(int(argv[1])), abs(int(argv[2])), False)
+                exit()
+        case "-s":
+            argv = argv[2:]
+            if len(re.findall(RAW_FILE_REGEX, argv[0])) == 1:
+                write_tile(argv[0], abs(int(argv[1])), abs(int(argv[2])), True)
+                exit()
         case _:
             raise Exception("Option not recognized")

@@ -1,3 +1,5 @@
+# GNU GPL-3.0
+
 import re
 from sys import argv
 import os

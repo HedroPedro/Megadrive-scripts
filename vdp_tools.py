@@ -74,6 +74,7 @@ def write_tile(file_path : str, w : int, h : int, is_sprite : bool):
                 index_w += 1    
                 if index_w == w * 8:
                     index_h += 1
+                    index_w = 0
 
             #TODO: Make better functions!!!
             def save_tiles():
